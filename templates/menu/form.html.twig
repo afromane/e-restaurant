@@ -1,0 +1,49 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Menu{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid p-0">
+        <div class="mb-3">
+            <h1 class="h3 d-inline align-middle">{{ action}}</h1>
+            <a class="badge bg-dark text-white ms-2" >
+                Menu
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6">
+               <form method="POST" enctype="multipart/form-data">
+                    <div class="card">
+                        
+                        <div class="card-body">
+                            <label>Designation</label> <br>
+                            {% if menu.label !="" %}
+                              <input type="text" class="form-control" name="label" value="{{ menu.label }}" required>
+                            {% else %}
+                               <input type="text" class="form-control" name="label" required>
+                            {% endif  %}
+                             
+                        </div>
+
+                        <div class="card-footer">
+                        <div style="position:absolute; right:10px;bottom:20px;">
+                                <a href="{{ path('app_menu')}}" class="btn btn-danger">Annuler</a>
+                                <button type="submit" class="btn btn-primary">{{ action}}</button>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+               </form>
+
+            </div>
+
+        </div>
+
+       
+    </div>
+
+
+{% endblock %}
+
+

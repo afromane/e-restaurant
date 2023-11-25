@@ -1,0 +1,58 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Menu{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid p-0">
+
+    <h1 class="h3 mb-3">{{ menu.label}}</h1>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                 {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+
+                        <a href="{{path('app_menu_new',{id: '0915_'~menu.id ~menu.label ~'#'~menu.id })}}" class="btn btn-primary"><i class="align-middle" data-feather="plus"></i> <span>Nouveau plat</span><a>
+                </div>
+                <div class="card-body">
+                     <table id="example1" class="table table-hover my-0">
+                        <thead>
+                            <tr>
+                                <th class="">Photo</th>
+                                <th class="">Label</th>
+                                <th class="">Prix</th>
+                                <th class="">Action(s)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for i in repas %}
+                            <tr>
+                                <td class=""><img src="{{ asset('images/'~ i.path) }}" style="height:60px;widht:60px;"/></td>
+                                <td class="">{{ i.label }}</td>
+                                <td class="">{{ i.prix }}</td>
+                                <td>
+                                    <a href="{{ path('app_menu_update', {id: '0915_'~i.id ~i.label ~'#'~i.id }) }}" class="btn btn-primary"><i class="align-middle" data-feather="edit"></i><a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+       
+    </div>
+
+
+{% endblock %}
+
+

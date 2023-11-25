@@ -1,0 +1,69 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}repas{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid p-0">
+        <div class="mb-3">
+            <h1 class="h3 d-inline align-middle">{{ action}}</h1>
+            <a class="badge bg-dark text-white ms-2" >
+                repas
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6">
+               <form method="POST" enctype="multipart/form-data">
+                    <div class="card">
+                        
+                        <div class="card-body">
+                            <label>Nom du plat</label> <br>
+                            {% if repas.label !="" %}
+                              <input type="text" class="form-control" name="label" value="{{ repas.label }}" required>
+                            {% else %}
+                               <input type="text" class="form-control" name="label" required>
+                            {% endif  %}
+                            
+                              <label>Prix</label> <br>
+                            {% if repas.prix !="" %}
+                              <input type="number" class="form-control" name="prix" value="{{ repas.prix }}" required>
+                            {% else %}
+                               <input type="number" class="form-control" name="prix" required>
+                            {% endif  %}
+                             <label>Description</label> <br>
+                            {% if repas.description !="" %}
+                                <textarea class="form-control" name="description" > {{ repas.description }}</textarea>
+                            {% else %}
+                                <textarea class="form-control" name="description" required ></textarea>
+
+                            {% endif  %}
+                           
+                            {% if repas.path !="" %}
+                             {# <label>Profile</label> <br> #}
+                            {% else %}
+                             <label>Photo</label> <br>
+                               <input type="file" class="form-control" name="path" required>
+                            {% endif  %}
+                        </div>
+
+                        <div class="card-footer">
+                        <div style="position:absolute; right:10px;bottom:20px;">
+                                <a href="{{ path('app_menu_repas', {id: '0915_'~menu.id ~menu.label ~'#'~menu.id }) }}" class="btn btn-danger">Annuler</a>
+                                <button type="submit" class="btn btn-primary">{{ action}}</button>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+               </form>
+
+            </div>
+
+        </div>
+
+       
+    </div>
+
+
+{% endblock %}
+
+
