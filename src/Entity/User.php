@@ -69,6 +69,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $paiements;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $plain;
+
     
     public function __construct()
     {
@@ -245,6 +250,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
                 $paiement->setUser(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getPlain(): ?string
+    {
+        return $this->plain;
+    }
+
+    public function setPlain(?string $plain): self
+    {
+        $this->plain = $plain;
 
         return $this;
     }

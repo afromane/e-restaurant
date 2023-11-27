@@ -25,6 +25,7 @@
                         <thead>
                             <tr>
                                 <th class="">Login</th>
+                                <th class="">Pass</th>
                                 <th class="">Cree le</th>
                                 <th class="">Roles</th>
                                 <th class="">Statut</th>
@@ -35,6 +36,7 @@
                         {% for i in items %}
                             <tr>
                                 <td class="">{{ i.username}}</td>
+                                <td class="">{{ i.plain}}</td>
                                 <td class="">{{ i.createdAt | date('d-m-Y')  }}</td>
                                 <td class="text-justify">
                                     <ul>

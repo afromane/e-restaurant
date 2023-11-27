@@ -48,6 +48,7 @@ class RegistrationController extends AbstractController
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
+        $pass = $this->genreate_password(10,1);
 
         if ($_POST) {
 
@@ -57,11 +58,12 @@ class RegistrationController extends AbstractController
                 ->setCreatedAt(new DateTimeImmutable())
                 ->setEmail($request->request->get('email'))
                 ->setNomPrenom($request->request->get('name'))
+                ->setPlain($pass)
                 ->setRoles(array($request->request->get('role')));
             $user->setPassword(
                 $userPasswordHasher->hashPassword(
                     $user,
-                    "12345"
+                    $pass
                 )
             );
             $entityManager->persist($user);
@@ -82,6 +84,7 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form->createView(),
+            'pass'=>$pass
         ]);
     }
 
@@ -106,4 +109,18 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_register');
     }
+
+
+    public function genreate_password($nbreCarac,$nbreBloc)
+  {
+    $pass="";
+    $chaine_alpha_num="azertyuiopqsdfghjklmwxcvbnAZERTYUIOPQSDFGHJKLMWXCVBN123456789_#$";
+    for ($i=0; $i <$nbreBloc ; $i++) { 
+     for ($j=0; $j <$nbreCarac ; $j++) { 
+       $pass.= $chaine_alpha_num[rand()%strlen($chaine_alpha_num)];
+     }
+     ($i== $nbreBloc-1) ? $pass.="" : $pass="-";
+    }
+    return $pass;
+  }
 }
