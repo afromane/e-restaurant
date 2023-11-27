@@ -1,0 +1,55 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Paiement{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid p-0">
+        <div class="mb-3">
+            <h1 class="h3 d-inline align-middle">{{ action}}</h1>
+            <a class="badge bg-dark text-white ms-2" >
+                Paiement
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6">
+               <form method="POST" >
+                   <div class="card">
+                        <div class="card-body">
+                            <label>Nom client  </label> <br>
+                            <input type="text" class="form-control" name="nom" value="{{ client.nomPrenom }}"  disabled >
+                            <label>Email client</label> <br>
+                            <input type="text" class="form-control" name="email" value="{{ client.email }}"  disabled >
+                            <label>Contact client</label> <br>
+                            <input type="text" class="form-control" name="phone" value="{{ client.phone }}"  disabled >
+                            <label>Date de reservation</label> <br>
+                            <input type="text" class="form-control" name="dateReserv" value="{{ client.dateReserv | date('d-m-Y') }}"  disabled >
+                            <label>Nombre de place</label> <br>
+                            <input type="text" class="form-control" name="place" value="{{ client.place }}"  disabled >
+                            <label>Prix</label> <br>
+                            <input type="text" class="form-control" name="montant" value="{{ client.montant|number_format(0, '.', ' ')  }} FCFA"  disabled >
+                            <input type="hidden" class="form-control" name="check" value="1" >
+                            
+                        </div>
+
+                        <div class="card-footer">
+                        <div style="position:absolute; right:10px;bottom:20px;">
+                                {# <a href="{{ path('app_menu')}}" class="btn btn-danger">Annuler</a> #}
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                            </div>
+                            <br>
+                        </div>
+                    </div>
+               </form>
+
+            </div>
+
+        </div>
+
+       
+    </div>
+
+
+{% endblock %}
+
+

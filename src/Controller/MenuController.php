@@ -16,7 +16,7 @@ use App\Service\FileUploader;
 class MenuController extends AbstractController
 {
     /**
-     * @Route("/menu", name="app_menu")
+     * @Route("space/menu", name="app_menu")
      */
     public function index(MenuRepository $menuRepository): Response
     {
@@ -25,7 +25,7 @@ class MenuController extends AbstractController
         ]);
     }
     /**
-     * @Route("/menu/new", name="app_menu_new",methods={"POST","GET"})
+     * @Route("space/menu/new", name="app_menu_new",methods={"POST","GET"})
      */
     public function create(Request $request, EntityManagerInterface $em, MenuRepository $menuRepository): Response
     {
@@ -62,7 +62,7 @@ class MenuController extends AbstractController
     }
 
     /**
-     * @Route("/menu/update/{id}", name="app_menu_update",methods={"POST","GET"})
+     * @Route("space/menu/update/{id}", name="app_menu_update",methods={"POST","GET"})
      */
     public function editer($id, Request $request, EntityManagerInterface $em, MenuRepository $menuRepository): Response
     {
@@ -101,7 +101,7 @@ class MenuController extends AbstractController
     }
 
     /**
-     * @Route("/menu/repas/{id}", name="app_menu_repas",methods={"POST","GET"})
+     * @Route("space/menu/repas/{id}", name="app_menu_repas",methods={"POST","GET"})
      */
     public function menuRepas($id, Request $request, EntityManagerInterface $em, MenuRepository $menuRepository, RepasRepository $repasRepository): Response
     {

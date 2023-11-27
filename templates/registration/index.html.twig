@@ -1,0 +1,77 @@
+{% extends 'admin.html.twig' %}
+
+{% block title %}Compte{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid p-0">
+
+    <h1 class="h3 mb-3">Utilisateur(s)</h1>
+
+    <div class="row">
+        <div class="col-12">
+            <div class="card">
+                <div class="card-header">
+                 {% for message in app.flashes('success') %}
+                        <div class="alert alert-success">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                        <a href="{{path('app_register')}}" class="btn btn-primary"><i class="align-middle" data-feather="plus"></i> <span>Nouvel utilisateur</span><a>
+                </div>
+                <div class="card-body">
+
+                     <table  id="example1" class="table table-hover my-0">
+                        <thead>
+                            <tr>
+                                <th class="">Login</th>
+                                <th class="">Cree le</th>
+                                <th class="">Roles</th>
+                                <th class="">Statut</th>
+                                <th class="">Action(s)</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {# {% for i in items %}
+                            <tr>
+                                <td class="">{{ i.membre.nom ~' '~ i.membre.prenom}}</td>
+                                <td class="">{{ i.username}}</td>
+                                <td class="">{{ i.createdAt | date('d-m-Y')  }}</td>
+                                <td class="text-justify">
+                                 {% for j in i.roles %}
+                                         {{j}} /
+                                        {% endfor %}
+                                    {# <ul>
+                                        {% for j in i.roles %}
+                                        <li> {{j}}</li>
+                                        {% endfor %}
+                                    </ul> 
+                                </td>
+                                <td class="">{{ i.status }}</td>
+                                <td>
+                                {% if 'COMPTE_UPDATE' in app.session.get('roles') %}
+                                    {% if i.status =='actif' %}
+                                      <a href="{{ path('app_account_status', {id: '0915_'~i.id ~i.username ~'#'~i.id ~'#inactif'}) }}" class="btn btn-danger"><i class="align-middle" data-feather="user-minus"></i><a>
+                                    {% else %}
+                                       <a href="{{ path('app_account_status', {id: '0915_'~i.id ~i.username ~'#'~i.id ~'#actif'}) }}" class="btn btn-success"><i class="align-middle" data-feather="user-plus"></i><a>
+                                    {% endif %}
+                                {% endif %}
+                                 
+                                </td>
+                            </tr>
+                        {% endfor %} #}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+
+       
+    </div>
+
+
+{% endblock %}
+
+

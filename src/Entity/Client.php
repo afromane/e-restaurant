@@ -44,6 +44,26 @@ class Client
      */
     private $paiements;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $montant;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $dateReserv;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $place;
+
     public function __construct()
     {
         $this->paiements = new ArrayCollection();
@@ -128,6 +148,54 @@ class Client
                 $paiement->setClient(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getMontant(): ?int
+    {
+        return $this->montant;
+    }
+
+    public function setMontant(?int $montant): self
+    {
+        $this->montant = $montant;
+
+        return $this;
+    }
+
+    public function getDateReserv(): ?\DateTimeInterface
+    {
+        return $this->dateReserv;
+    }
+
+    public function setDateReserv(\DateTimeInterface $dateReserv): self
+    {
+        $this->dateReserv = $dateReserv;
+
+        return $this;
+    }
+
+    public function getPhone(): ?string
+    {
+        return $this->phone;
+    }
+
+    public function setPhone(string $phone): self
+    {
+        $this->phone = $phone;
+
+        return $this;
+    }
+
+    public function getPlace(): ?int
+    {
+        return $this->place;
+    }
+
+    public function setPlace(int $place): self
+    {
+        $this->place = $place;
 
         return $this;
     }

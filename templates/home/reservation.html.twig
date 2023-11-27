@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Reservation{% endblock %}
+
+{% block body %}
+<section class="book_section layout_padding">
+    <div class="container">
+      <div class="heading_container">
+        <h2>
+          Réserver une table
+        </h2>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="form_container">
+            <form method="POST">
+              <div>
+                <input type="text" name="name" class="form-control" placeholder="Votre Nom"  required/>
+              </div>
+              <div>
+                <input type="text" name="phone"  class="form-control" placeholder="Votre Contact"  required/>
+              </div>
+              <div>
+                <input type="email"  name="email" class="form-control" placeholder="Votre  adresse Email"  required/>
+              </div>
+              <div>
+                Prix Reservation (FCFA)
+                <input type="text" name="montant"  class="form-control"  value="2 000" disabled="disabled" required/>
+              </div>
+              <div>
+                <select name="people"  class="form-control nice-select wide" required>
+                  <option value="" disabled selected>
+                    Combien de Personnes?
+                  </option>
+                  <option value="2">
+                    2
+                  </option>
+                  <option value="3">
+                    3
+                  </option>
+                  <option value="4">
+                    4
+                  </option>
+                  <option value="5">
+                    5
+                  </option>
+                </select>
+              </div>
+              <div>
+                <input type="date" name="date"  class="form-control" required>
+              </div>
+              
+              <div class="btn_box">
+                <button type="submit">
+                  Réserver Maintenant
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="map_container ">
+            <div id="googleMap"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

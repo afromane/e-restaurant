@@ -1,0 +1,56 @@
+
+
+{% extends 'admin.html.twig' %}
+
+{% block title %}Utilisateur{% endblock %}
+
+
+{% block body %}
+    <div class="container-fluid p-0">
+        <div class="mb-3">
+            <h1 class="h3 d-inline align-middle">Nouvel</h1>
+            <a class="badge bg-dark text-white ms-2" >
+                Utilisateur
+            </a>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-6">
+                <form method="POST">
+                    <div class="card">
+                        <div class="card-body">
+                            <label>Nom</label> <br>
+                            <input type="text" class="form-control" name="name" required> <br>
+                              <label>Email</label> <br>
+                            <input type="email" class="form-control" name="email" required> <br>
+                             <label>Login</label> <br>
+                            <input type="text" class="form-control" name="username" required> <br>
+                              <label>Email</label> <br>
+                            <label>Role</label> <br>
+                            <select class="form-select js-example-basic-multiple" name="role" required>
+                                    <option   value="administrateur">Administrateur</option>
+                                    <option   value="controlleur">controlleur</option>
+                            </select>
+
+                        </div>
+                         <div class="card-footer">
+                               <div style="position:absolute; right:10px;bottom:20px;">
+                                <a href="{{ path('app_account')}}" class="btn btn-danger">Annuler</a>
+                                <button type="submit" class="btn btn-primary">Enregistrer</button>
+                                </div>
+                                <br>
+                        </div>
+                    </div>
+                </form>
+
+            </div>
+
+        </div>
+
+       
+    </div>
+
+
+{% endblock %}
+
+
+
