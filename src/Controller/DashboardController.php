@@ -18,12 +18,10 @@ class DashboardController extends AbstractController
      */
     public function index(Request $request, MenuRepository $menuRepository, PaiementRepository $paiementRepository, ClientRepository $clientRepository): Response
     {
-        
         $session = $request->getSession();
-
-
-
         $session->set('menu', $menuRepository->findAll());
+        $session->set('roles', $this->getUser()->getRoles());
+
         $soldeReservByMois = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
         foreach ($paiementRepository->findAll() as $value) {
 

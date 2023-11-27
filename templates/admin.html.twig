@@ -58,34 +58,41 @@
 								class="align-middle">Confirmer</span>
 						</a>
 					</li>
-					<li class="sidebar-header">
-						Utilisateur
-					</li>
-					<li class="sidebar-item ">
-						<a class="sidebar-link" href="{{path('app_account')}}">
-							<i class="align-middle" data-feather="users"></i> <span
-								class="align-middle">Liste utilisateur</span>
-						</a>
-					</li>
-					<li class="sidebar-header">
-						Menu
-					</li>
-					{% for i in app.session.get('menu') %}
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="{{ path('app_menu_repas', {id: '0915_'~i.id ~i.label ~'#'~i.id }) }}">
-							<i class="align-middle" data-feather="book-open"></i> <span class="align-middle">{{i.label}}</span>
-						</a>
-					</li>
-					{% endfor %}
+					{% for i in app.session.get('roles') %}
+					{% if i== "ROLE_ADMIN" %}
 					
-					<li class="sidebar-header">
-						Parametres
-					</li>
-					<li class="sidebar-item">
-						<a class="sidebar-link" href="{{path('app_menu')}}">
-							<i class="align-middle" data-feather="bookmark"></i> <span class="align-middle">Menu</span>
-						</a>
-					</li>
+						<li class="sidebar-header">
+							Utilisateur
+						</li>
+						<li class="sidebar-item ">
+							<a class="sidebar-link" href="{{path('app_account')}}">
+								<i class="align-middle" data-feather="users"></i> <span
+									class="align-middle">Liste utilisateur</span>
+							</a>
+						</li>
+						<li class="sidebar-header">
+							Menu
+						</li>
+						{% for i in app.session.get('menu') %}
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{ path('app_menu_repas', {id: '0915_'~i.id ~i.label ~'#'~i.id }) }}">
+								<i class="align-middle" data-feather="book-open"></i> <span class="align-middle">{{i.label}}</span>
+							</a>
+						</li>
+						{% endfor %}
+						
+						<li class="sidebar-header">
+							Parametres
+						</li>
+						<li class="sidebar-item">
+							<a class="sidebar-link" href="{{path('app_menu')}}">
+								<i class="align-middle" data-feather="bookmark"></i> <span class="align-middle">Menu</span>
+							</a>
+						</li>
+						{% endif %}
+
+					{% endfor %}
+
 					
 
 				</ul>

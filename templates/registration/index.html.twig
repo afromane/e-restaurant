@@ -32,16 +32,12 @@
                             </tr>
                         </thead>
                         <tbody>
-                        {# {% for i in items %}
+                        {% for i in items %}
                             <tr>
-                                <td class="">{{ i.membre.nom ~' '~ i.membre.prenom}}</td>
                                 <td class="">{{ i.username}}</td>
                                 <td class="">{{ i.createdAt | date('d-m-Y')  }}</td>
                                 <td class="text-justify">
-                                 {% for j in i.roles %}
-                                         {{j}} /
-                                        {% endfor %}
-                                    {# <ul>
+                                    <ul>
                                         {% for j in i.roles %}
                                         <li> {{j}}</li>
                                         {% endfor %}
@@ -49,17 +45,17 @@
                                 </td>
                                 <td class="">{{ i.status }}</td>
                                 <td>
-                                {% if 'COMPTE_UPDATE' in app.session.get('roles') %}
+                                {# {% if 'COMPTE_UPDATE' in app.session.get('roles') %}
                                     {% if i.status =='actif' %}
                                       <a href="{{ path('app_account_status', {id: '0915_'~i.id ~i.username ~'#'~i.id ~'#inactif'}) }}" class="btn btn-danger"><i class="align-middle" data-feather="user-minus"></i><a>
                                     {% else %}
                                        <a href="{{ path('app_account_status', {id: '0915_'~i.id ~i.username ~'#'~i.id ~'#actif'}) }}" class="btn btn-success"><i class="align-middle" data-feather="user-plus"></i><a>
                                     {% endif %}
-                                {% endif %}
+                                {% endif %} #}
                                  
                                 </td>
                             </tr>
-                        {% endfor %} #}
+                        {% endfor %}
                     </table>
                 </div>
             </div>
