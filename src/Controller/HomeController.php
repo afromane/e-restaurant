@@ -3,6 +3,8 @@
 namespace App\Controller;
 
 use DateTime;
+use Dompdf\Dompdf;
+use Dompdf\Options;
 use App\Entity\Client;
 use DateTimeImmutable;
 use App\Service\EmailService;
@@ -14,8 +16,8 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
@@ -94,7 +96,26 @@ class HomeController extends AbstractController
                 $em->persist($client);
                 $em->flush();
 
-                dd($client);
+                $pdfOptions = new Options();
+                $pdfOptions->set(array(
+                    'defaultFont' => 'Arial',
+                    'isHtml5ParserEnabled' => true,
+                    'isRemoteEnabled' => true
+                ));
+        
+                $dompdf = new Dompdf($pdfOptions);
+                $html = $this->renderView('pdf/ticket.html.twig', [
+                    'client'=>$client
+                ]);
+        
+                $dompdf->loadHtml($html);
+                $dompdf->setPaper('A5', 'portrait');
+                $dompdf->render();
+                $dompdf->stream("ticket" . time() . ".pdf", [
+                    "Attachment" => false // true if we want to download automatically file
+                ]);
+
+                return $this->redirectToRoute('app_home');
 
 
         }

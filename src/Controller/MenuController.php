@@ -18,8 +18,9 @@ class MenuController extends AbstractController
     /**
      * @Route("space/menu", name="app_menu")
      */
-    public function index(MenuRepository $menuRepository): Response
+    public function index(Request $request, MenuRepository $menuRepository): Response
     {
+      
         return $this->render('menu/index.html.twig', [
             'items' => $menuRepository->findAll(),
         ]);
@@ -29,9 +30,8 @@ class MenuController extends AbstractController
      */
     public function create(Request $request, EntityManagerInterface $em, MenuRepository $menuRepository): Response
     {
-        if ($request->getSession()->get('isLogin') != true)
-            // return $this->redirectToRoute('app_logout');
-            $menu = new Menu();
+
+        $menu = new Menu();
         if ($_POST) {
 
             $menu->setLabel($request->request->get('label'));
@@ -66,8 +66,7 @@ class MenuController extends AbstractController
      */
     public function editer($id, Request $request, EntityManagerInterface $em, MenuRepository $menuRepository): Response
     {
-        if ($request->getSession()->get('isLogin') != true)
-            // return $this->redirectToRoute('app_logout');
+      
             $split = explode('#', $id);
         $id = intval($split[1]);
         $menu = new Menu();
@@ -105,9 +104,8 @@ class MenuController extends AbstractController
      */
     public function menuRepas($id, Request $request, EntityManagerInterface $em, MenuRepository $menuRepository, RepasRepository $repasRepository): Response
     {
-        if ($request->getSession()->get('isLogin') != true)
-            // return $this->redirectToRoute('app_logout');
-            $split = explode('#', $id);
+      
+        $split = explode('#', $id);
         $id = intval($split[1]);
         $menu = new Menu();
         $menu = $menuRepository->find($id);
@@ -128,10 +126,8 @@ class MenuController extends AbstractController
      */
     public function nouveauRepas($id, Request $request, EntityManagerInterface $em, MenuRepository $menuRepository, FileUploader $fileUploader): Response
     {
-        if ($request->getSession()->get('isLogin') != true)
-            // return $this->redirectToRoute('app_logout');
-
-            $split = explode('#', $id);
+        
+        $split = explode('#', $id);
         $id = intval($split[1]);
         $menu = new Menu();
         $menu = $menuRepository->find($id);
@@ -154,8 +150,9 @@ class MenuController extends AbstractController
             $em->persist($repas);
             $em->flush();
             $this->addFlash('success', 'Element ajouter.');
-            return $this->redirectToRoute('app_menu_repas',array(
-                            'id'=>'0915_'.$menu->getId().''.$menu->getLabel().'#'.$menu->getID() )) ;
+            return $this->redirectToRoute('app_menu_repas', array(
+                'id' => '0915_' . $menu->getId() . '' . $menu->getLabel() . '#' . $menu->getID()
+            ));
         }
         return $this->render(
             'menu/form-repas.html.twig',

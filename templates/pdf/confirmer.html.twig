@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>{% block title %}Welcome!{% endblock %}</title>
+        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+
+        <meta charset="utf-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <link rel="shortcut icon" href="images/favicon.png" type="">
+        <title> List e client </title>
+
+        <link rel="stylesheet" type="text/css" href="{{ asset('')}}css/bootstrap.css" />
+
+        <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/css/nice-select.min.css" integrity="sha512-CruCP+TD3yXzlvvijET8wV5WxxEh5H8P4cmz0RFbKK6FlZ2sYl3AEsKlLPHbniXKSrDdFewhbmBK5skbdsASbQ==" crossorigin="anonymous" />
+        <link href="{{ asset('')}}css/font-awesome.min.css" rel="stylesheet" />
+        <link href="{{ asset('')}}css/style.css" rel="stylesheet" />
+        <link href="{{ asset('')}}css/responsive.css" rel="stylesheet" />
+
+        <style>
+            .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%;  }
+            .table1, .table1 th,.table1 td {
+                            border: 1px solid black;
+                            border-collapse: collapse;
+                            width:100%;
+                            font-weight:none;
+
+                            }
+        </style>
+    </head>
+    <body >
+
+
+
+        <div class="example-wrapper">
+
+            <h1 style="text-align:center;font: 18px/1.5 sans-serif;">Liste client confirmation</h1>
+            <table class="table1">
+                <thead>
+                    <tr>
+                        <th class="">Nom Client</th>
+                        <th class="">Contact </th>
+                        <th class="">Email</th>
+                        <th class="">Date reservation</th>
+                        <th class="">Place</th>
+                        <th class="">Personnel</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for i in items %}
+                        <tr>
+                            
+                            <td class="">{{ i.client.nomPrenom | upper }}</td>
+                            <td class="">{{ i.client.phone }}</td>
+                            <td class="">{{ i.client.email }}</td>
+                            <td class="">{{ i.client.dateReserv | date('d-m-Y') }}</td>
+                            <td class="">{{ i.client.place}}</td>
+                            <td class="">{{ i.user.nomPrenom}}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+       
+        <!-- jQuery -->
+  <script src="{{ asset('')}}js/jquery-3.4.1.min.js"></script>
+  <!-- popper js -->
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous">
+  </script>
+  <!-- bootstrap js -->
+  <script src="{{ asset('')}}js/bootstrap.js"></script>
+  <!-- owl slider -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js">
+  </script>
+  <!-- isotope js -->
+  <script src="https://unpkg.com/isotope-layout@3.0.4/dist/isotope.pkgd.min.js"></script>
+  <!-- nice select -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-nice-select/1.1.0/js/jquery.nice-select.min.js"></script>
+  <!-- custom js -->
+  <script src="{{ asset('')}}js/custom.js"></script>
+    </body>
+</html>

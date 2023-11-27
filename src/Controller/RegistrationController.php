@@ -24,18 +24,15 @@ class RegistrationController extends AbstractController
 
     public function __construct(EmailVerifier $emailVerifier)
     {
+
         $this->emailVerifier = $emailVerifier;
     }
 
-       /**
+    /**
      * @Route("/account", name="app_account")
      */
-    public function index( Request $request ,UserRepository $userRepository): Response
+    public function index(Request $request, UserRepository $userRepository): Response
     {
-        // if ($request->getSession()->get('isLogin')!=true )
-        //     return $this->redirectToRoute('app_logout');
-        //     $session = $request->getSession();
-        //     $session->set('menu', 'account');
         return $this->render('registration/index.html.twig', [
             'items' => $userRepository->findAll(),
 
@@ -47,6 +44,7 @@ class RegistrationController extends AbstractController
      */
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+      
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
@@ -55,13 +53,13 @@ class RegistrationController extends AbstractController
 
             // encode the plain password
             $user->setUsername($request->request->get('username'))
-                    ->setStatus('actif')
-                    ->setCreatedAt(new DateTimeImmutable())
-                    ->setEmail($request->request->get('email'))
-                    ->setNomPrenom($request->request->get('name'))
-                    ->setRoles(array($request->request->get('role')));
+                ->setStatus('actif')
+                ->setCreatedAt(new DateTimeImmutable())
+                ->setEmail($request->request->get('email'))
+                ->setNomPrenom($request->request->get('name'))
+                ->setRoles(array($request->request->get('role')));
             $user->setPassword(
-            $userPasswordHasher->hashPassword(
+                $userPasswordHasher->hashPassword(
                     $user,
                     "12345"
                 )

@@ -13,12 +13,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ClientController extends AbstractController
 {
+
     /**
      * @Route("/client/attente", name="app_client_attente")
      */
-    public function enAttente(ClientRepository $clientRepository): Response
+    public function enAttente(Request $request, ClientRepository $clientRepository): Response
     {
-
+        
         return $this->render('client/waiting.html.twig', [
             'items' => $clientRepository->findBy(array('status' => "En attente")),
         ]);
@@ -29,20 +30,20 @@ class ClientController extends AbstractController
      */
     public function payer($slug, Request $request, EntityManagerInterface $em, ClientRepository $clientRepository): Response
     {
-        //if ($request->getSession()->get('isLogin') != true)
-            // return $this->redirectToRoute('app_logout');
+
+        
         $split = explode('#', $slug);
         $id = intval($split[1]);
         $client = $clientRepository->find($id);
-        
+
         if ($_POST) {
             $client->setStatus("Confirmer");
             $em->flush();
-                $paiement = new Paiement();
-                $paiement->setClient($client)
-                          ->setUser($this->getUser())
-                          ->setMontant($client->getMontant())
-                          ->setCreatedAt(new DateTimeImmutable());
+            $paiement = new Paiement();
+            $paiement->setClient($client)
+                ->setUser($this->getUser())
+                ->setMontant($client->getMontant())
+                ->setCreatedAt(new DateTimeImmutable());
             $em->persist($paiement);
             $em->flush();
             $this->addFlash('success', 'Element mis a jour.');
@@ -61,9 +62,9 @@ class ClientController extends AbstractController
     /**
      * @Route("/client/confirm", name="app_client_confirmer")
      */
-    public function confirm(ClientRepository $clientRepository): Response
+    public function confirm(Request $request, ClientRepository $clientRepository): Response
     {
-
+       
         return $this->render('client/confirm.html.twig', [
             'items' => $clientRepository->findBy(array('status' => "Confirmer")),
 
